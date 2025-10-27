@@ -1,0 +1,15 @@
+{
+  "timestamp": 1761579300933,
+  "operation": {
+    "id": "backend:server:main"
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/backend/server.ts",
+      "type": "text",
+      "size": 33595,
+      "dependencies": false
+    }
+  ]
+}

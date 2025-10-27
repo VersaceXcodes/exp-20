@@ -1,0 +1,278 @@
+asyncapi: 2.0.0
+info:
+  title: Exp-20 Realtime API
+  version: 1.0.0
+  description: AsyncAPI definition for real-time features of the Exp-20 application
+servers:
+  production:
+    url: http://localhost:3000
+    protocol: ws
+channels:
+  user/registered:
+    subscribe:
+      summary: Notify the system when a user registers
+      operationId: onUserRegistered
+      message:
+        headers:
+          type: object
+          properties:
+            content_type:
+              type: string
+              enum:
+                - application/json
+        payload:
+          type: object
+          properties:
+            user_id:
+              type: string
+            email:
+              type: string
+            name:
+              type: string
+          required:
+            - user_id
+            - email
+            - name
+  user/profileUpdated:
+    subscribe:
+      summary: Notify the system when a user updates their profile
+      operationId: onUserProfileUpdated
+      message:
+        headers:
+          type: object
+          properties:
+            content_type:
+              type: string
+              enum:
+                - application/json
+        payload:
+          type: object
+          properties:
+            user_id:
+              type: string
+            email:
+              type: string
+            name:
+              type: string
+          required:
+            - user_id
+  expo/updated:
+    subscribe:
+      summary: Notify when an expo is updated
+      operationId: onExpoUpdated
+      message:
+        headers:
+          type: object
+          properties:
+            content_type:
+              type: string
+              enum:
+                - application/json
+        payload:
+          type: object
+          properties:
+            expo_id:
+              type: string
+            title:
+              type: string
+            description:
+              type: string
+            date:
+              type: string
+            category:
+              type: string
+            location:
+              type: string
+            featured:
+              type: boolean
+          required:
+            - expo_id
+  expo/registrationCreated:
+    subscribe:
+      summary: Notify the system when a registration is created for an expo
+      operationId: onExpoRegistrationCreated
+      message:
+        headers:
+          type: object
+          properties:
+            content_type:
+              type: string
+              enum:
+                - application/json
+        payload:
+          type: object
+          properties:
+            registration_id:
+              type: string
+            user_id:
+              type: string
+            expo_id:
+              type: string
+            registered_at:
+              type: string
+          required:
+            - registration_id
+            - user_id
+            - expo_id
+  exhibitor/interaction:
+    subscribe:
+      summary: Notify about an interaction with an exhibitor
+      operationId: onExhibitorInteraction
+      message:
+        headers:
+          type: object
+          properties:
+            content_type:
+              type: string
+              enum:
+                - application/json
+        payload:
+          type: object
+          properties:
+            interaction_id:
+              type: string
+            user_id:
+              type: string
+            exhibitor_id:
+              type: string
+            interaction_type:
+              type: string
+            created_at:
+              type: string
+          required:
+            - interaction_id
+            - user_id
+            - exhibitor_id
+            - interaction_type
+  notification/created:
+    subscribe:
+      summary: Notify users when a notification is created
+      operationId: onNotificationCreated
+      message:
+        headers:
+          type: object
+          properties:
+            content_type:
+              type: string
+              enum:
+                - application/json
+        payload:
+          type: object
+          properties:
+            notification_id:
+              type: string
+            user_id:
+              type: string
+            message:
+              type: string
+            type:
+              type: string
+            created_at:
+              type: string
+          required:
+            - notification_id
+            - user_id
+            - message
+            - type
+components:
+  messages:
+    UserRegisteredMessage:
+      payload:
+        type: object
+        properties:
+          user_id:
+            type: string
+          email:
+            type: string
+          name:
+            type: string
+        required:
+          - user_id
+          - email
+          - name
+    UserProfileUpdatedMessage:
+      payload:
+        type: object
+        properties:
+          user_id:
+            type: string
+          email:
+            type: string
+          name:
+            type: string
+        required:
+          - user_id
+    ExpoUpdatedMessage:
+      payload:
+        type: object
+        properties:
+          expo_id:
+            type: string
+          title:
+            type: string
+          description:
+            type: string
+          date:
+            type: string
+          category:
+            type: string
+          location:
+            type: string
+          featured:
+            type: boolean
+        required:
+          - expo_id
+    ExpoRegistrationCreatedMessage:
+      payload:
+        type: object
+        properties:
+          registration_id:
+            type: string
+          user_id:
+            type: string
+          expo_id:
+            type: string
+          registered_at:
+            type: string
+        required:
+          - registration_id
+          - user_id
+          - expo_id
+    ExhibitorInteractionMessage:
+      payload:
+        type: object
+        properties:
+          interaction_id:
+            type: string
+          user_id:
+            type: string
+          exhibitor_id:
+            type: string
+          interaction_type:
+            type: string
+          created_at:
+            type: string
+        required:
+          - interaction_id
+          - user_id
+          - exhibitor_id
+          - interaction_type
+    NotificationCreatedMessage:
+      payload:
+        type: object
+        properties:
+          notification_id:
+            type: string
+          user_id:
+            type: string
+          message:
+            type: string
+          type:
+            type: string
+          created_at:
+            type: string
+        required:
+          - notification_id
+          - user_id
+          - message
+          - type

@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761579513046,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_AdminPanel",
+      "version": "latest"
+    }
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/vitereact/src/components/views/UV_AdminPanel.tsx",
+      "type": "text",
+      "size": 2939,
+      "dependencies": false
+    }
+  ]
+}

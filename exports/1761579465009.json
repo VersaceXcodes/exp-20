@@ -1,0 +1,21 @@
+{
+  "timestamp": 1761579465009,
+  "operation": {
+    "id": "backend:tests:main"
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/backend/server.test.ts",
+      "type": "text",
+      "size": 3415,
+      "dependencies": false
+    },
+    {
+      "path": "/mnt/data/exp-20/backend/jest.config.ts",
+      "type": "text",
+      "size": 133,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "timestamp": 1761579090375,
+  "operation": {
+    "id": "backend:specifications:asyncapi"
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/backend/asyncapi.yaml",
+      "type": "text",
+      "size": 6604,
+      "dependencies": false
+    }
+  ]
+}

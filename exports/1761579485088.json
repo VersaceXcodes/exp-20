@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761579485088,
+  "operation": {
+    "id": "webapp:react:root",
+    "refs": {
+      "id": "app",
+      "version": "1761579466908"
+    }
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/vitereact/src/App.tsx",
+      "type": "text",
+      "size": 3290,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "timestamp": 1761579466270,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/backend/package.json",
+      "type": "text",
+      "size": 1443,
+      "dependencies": true
+    }
+  ]
+}

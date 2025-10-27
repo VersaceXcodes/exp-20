@@ -1,0 +1,15 @@
+{
+  "timestamp": 1761579028678,
+  "operation": {
+    "id": "db:schemas:zod"
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/backend/schema.ts",
+      "type": "text",
+      "size": 12592,
+      "dependencies": false
+    }
+  ]
+}

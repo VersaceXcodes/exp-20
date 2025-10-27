@@ -1,0 +1,15 @@
+{
+  "timestamp": 1761579418975,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/vitereact/package.json",
+      "type": "text",
+      "size": 2949,
+      "dependencies": true
+    }
+  ]
+}

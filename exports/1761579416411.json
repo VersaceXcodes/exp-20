@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761579416411,
+  "operation": {
+    "id": "webapp:react:store",
+    "refs": {
+      "id": "redux",
+      "version": "1761579330762"
+    }
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/vitereact/src/store/main.tsx",
+      "type": "text",
+      "size": 7213,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761579509345,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_ExpoDetails",
+      "version": "1761579485894"
+    }
+  },
+  "projectId": "exp-20",
+  "files": [
+    {
+      "path": "/mnt/data/exp-20/vitereact/src/components/views/UV_ExpoDetails.tsx",
+      "type": "text",
+      "size": 2877,
+      "dependencies": false
+    }
+  ]
+}
