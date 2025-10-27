@@ -1,0 +1,572 @@
+openapi: 3.0.0
+info:
+  title: Exp-20 API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserInput"
+      responses:
+        "201":
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auth_token:
+                    type: string
+  /auth/login:
+    post:
+      summary: Log in a user
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        "200":
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auth_token:
+                    type: string
+  /auth/recover-password:
+    post:
+      summary: Recover user password
+      operationId: recoverPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        "200":
+          description: Password recovery email sent
+  /users/{user_id}:
+    get:
+      summary: Get a user profile
+      operationId: getUserProfile
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Retrieved user profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    patch:
+      summary: Update a user profile
+      operationId: updateUserProfile
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserInput"
+      responses:
+        "200":
+          description: User profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /expos:
+    get:
+      summary: Search for expos
+      operationId: searchExpos
+      parameters:
+        - name: query
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            enum:
+              - title
+              - date
+              - category
+            default: date
+        - name: sort_order
+          in: query
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+      responses:
+        "200":
+          description: List of expos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Expo"
+    post:
+      summary: Create a new expo
+      operationId: createExpo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateExpoInput"
+      responses:
+        "201":
+          description: Expo created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expo"
+  /expos/{expo_id}:
+    get:
+      summary: Get details of a specific expo
+      operationId: getExpoDetails
+      parameters:
+        - name: expo_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Details of the expo
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expo"
+    patch:
+      summary: Update a specific expo
+      operationId: updateExpo
+      parameters:
+        - name: expo_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateExpoInput"
+      responses:
+        "200":
+          description: Expo updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expo"
+  /expo-registrations:
+    post:
+      summary: Register a user for an expo
+      operationId: createExpoRegistration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateExpoRegistrationInput"
+      responses:
+        "201":
+          description: User registered for expo successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpoRegistration"
+  /exhibitors:
+    post:
+      summary: Create an exhibitor profile
+      operationId: createExhibitor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateExhibitorInput"
+      responses:
+        "201":
+          description: Exhibitor profile created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Exhibitor"
+  /exhibitors/{exhibitor_id}:
+    get:
+      summary: Get details of a specific exhibitor
+      operationId: getExhibitorDetails
+      parameters:
+        - name: exhibitor_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Details of the exhibitor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Exhibitor"
+    patch:
+      summary: Update a specific exhibitor
+      operationId: updateExhibitor
+      parameters:
+        - name: exhibitor_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateExhibitorInput"
+      responses:
+        "200":
+          description: Exhibitor updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Exhibitor"
+  /virtual-booths:
+    post:
+      summary: Create a virtual booth
+      operationId: createVirtualBooth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateVirtualBoothInput"
+      responses:
+        "201":
+          description: Virtual booth created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VirtualBooth"
+  /virtual-booths/{booth_id}:
+    get:
+      summary: Get details of a specific virtual booth
+      operationId: getVirtualBoothDetails
+      parameters:
+        - name: booth_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Details of the virtual booth
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VirtualBooth"
+    patch:
+      summary: Update a specific virtual booth
+      operationId: updateVirtualBooth
+      parameters:
+        - name: booth_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateVirtualBoothInput"
+      responses:
+        "200":
+          description: Virtual booth updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VirtualBooth"
+  /notifications/{user_id}:
+    get:
+      summary: Retrieve notifications for a user
+      operationId: getUserNotifications
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of user notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Notification"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        user_id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    CreateUserInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        password_hash:
+          type: string
+    UpdateUserInput:
+      type: object
+      properties:
+        user_id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        password_hash:
+          type: string
+    Expo:
+      type: object
+      properties:
+        expo_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+        category:
+          type: string
+        location:
+          type: string
+        featured:
+          type: boolean
+    CreateExpoInput:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+        category:
+          type: string
+        location:
+          type: string
+        featured:
+          type: boolean
+    UpdateExpoInput:
+      type: object
+      properties:
+        expo_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+        category:
+          type: string
+        location:
+          type: string
+        featured:
+          type: boolean
+    ExpoRegistration:
+      type: object
+      properties:
+        registration_id:
+          type: string
+        user_id:
+          type: string
+        expo_id:
+          type: string
+        registered_at:
+          type: string
+          format: date-time
+    CreateExpoRegistrationInput:
+      type: object
+      properties:
+        user_id:
+          type: string
+        expo_id:
+          type: string
+    Exhibitor:
+      type: object
+      properties:
+        exhibitor_id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        company:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    CreateExhibitorInput:
+      type: object
+      properties:
+        user_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        company:
+          type: string
+          nullable: true
+    UpdateExhibitorInput:
+      type: object
+      properties:
+        exhibitor_id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        company:
+          type: string
+          nullable: true
+    VirtualBooth:
+      type: object
+      properties:
+        booth_id:
+          type: string
+        exhibitor_id:
+          type: string
+        description:
+          type: string
+          nullable: true
+        media_urls:
+          type: string
+          nullable: true
+        product_catalog:
+          type: string
+          nullable: true
+    CreateVirtualBoothInput:
+      type: object
+      properties:
+        exhibitor_id:
+          type: string
+        description:
+          type: string
+          nullable: true
+        media_urls:
+          type: string
+          nullable: true
+        product_catalog:
+          type: string
+          nullable: true
+    UpdateVirtualBoothInput:
+      type: object
+      properties:
+        booth_id:
+          type: string
+        exhibitor_id:
+          type: string
+        description:
+          type: string
+          nullable: true
+        media_urls:
+          type: string
+          nullable: true
+        product_catalog:
+          type: string
+          nullable: true
+    Notification:
+      type: object
+      properties:
+        notification_id:
+          type: string
+        user_id:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
